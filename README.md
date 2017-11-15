@@ -677,3 +677,17 @@ export default new Router({ routes })
 看看效果：点击菜单，路径跳转，并且每次都是单独去加载路由的文件。
 
 ![](./src/assets/s14.png)
+
+# 8 github 部署
+如果你想在github上部署，那么你要修改config/index.js的以下代码, 不然有些文件因为路径问题可能会找不到。
+
+```
+ build: {
+    // Template for index.html
+    index: path.resolve(__dirname, '../docs/index.html'),
+
+    // Paths
+    assetsRoot: path.resolve(__dirname, '../docs'),
+    assetsSubDirectory: 'static',
+    assetsPublicPath: '/vue-el-dashboard/',
+```
