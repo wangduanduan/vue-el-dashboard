@@ -9,6 +9,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 
 const env = require('../config/prod.env')
 
@@ -28,24 +29,36 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.DefinePlugin({
       'process.env': env
     }),
-    // UglifyJs do not support ES6+, you can also use babel-minify for better treeshaking: https://github.com/babel/minify
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      },
-      sourceMap: config.build.productionSourceMap,
-      parallel: true
+    new ParallelUglifyPlugin({
+      cacheDir: '.cache/',
+      uglifyJS: {
+        output: {
+          comments: false
+        },
+        compress: {
+          warnings: false
+        }
+      }
     }),
+    // UglifyJs do not support ES6+, you can also use babel-minify for better treeshaking: https://github.com/babel/minify
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false
+    //   },
+    //   sourceMap: config.build.productionSourceMap,
+    //   parallel: true
+    // }),
     // extract css into its own file
     new ExtractTextPlugin({
       filename: utils.assetsPath('css/[name].[contenthash].css'),
       // set the following option to `true` if you want to extract CSS from
       // codesplit chunks into this main css file as well.
       // This will result in *all* of your app's CSS being loaded upfront.
-      allChunks: false,
+      allChunks: false
     }),
     // Compress extracted CSS. We are using this plugin so that possible
     // duplicated CSS from different components can be deduped.
@@ -93,7 +106,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // prevent vendor hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
-      minChunks: Infinity,
+      minChunks: Infinity
     }),
     // This instance extracts shared chunks from code splitted chunks and bundles them
     // in a separate chunk, similar to the vendor chunk
@@ -102,7 +115,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       name: 'app',
       async: 'vendor-async',
       children: true,
-      minChunks: 3,
+      minChunks: 3
     }),
 
     // copy custom static assets

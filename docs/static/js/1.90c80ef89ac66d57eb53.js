@@ -1,2 +1,0 @@
-webpackJsonp([1],{mpfJ:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var l=function(){var e=this,n=e.$createElement;return(e._self._c||n)("div",[e._v("\n  这是：Checkbox 多选框\n")])},r=[],u={render:l,staticRenderFns:r},c=u,s=t("/Xao"),a=s(null,c,!1,null,null,null);n.default=a.exports}});
-//# sourceMappingURL=1.90c80ef89ac66d57eb53.js.map
