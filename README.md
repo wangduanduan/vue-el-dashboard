@@ -1,6 +1,13 @@
 
 # 1. [查看在线demo](https://wdd.js.org/vue-el-dashboard/#/)
 
+注意目前这个项目是使用vue-cli 2x版本构建的，很多模块都已经废弃了。建议看看最新版的demo, https://github.com/wangduanduan/v3-el-dashboard 
+最新版的demo增加了一下内容：
+
+- 使用vue-cli 3x
+- 使用vuex
+- 增加多标签页来控制控制路由
+
 # 2. 初步教程
 
 [阅读第一部分文档](https://wdd.js.org/vue-vue-router-elementui-stupid-simple-dashboard.html)
